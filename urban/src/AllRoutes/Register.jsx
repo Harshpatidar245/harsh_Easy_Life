@@ -26,6 +26,8 @@ const CFaLock = chakra(FaLock);
 const CFaPhone = chakra(FaPhone);
 
 const Register = () => {
+  const [error, setError] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -37,11 +39,16 @@ const Register = () => {
 
   const handleShowClick = () => setShowPassword(!showPassword);
 
-  
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    
+    if (name === "password") {
+      const newPassword = value;
+      setPassword(newPassword);
+      const validationError = validatePassword(newPassword);
+      setError(validationError);
+    }
   };
 
   let navigate = useNavigate();
@@ -62,7 +69,31 @@ const Register = () => {
       alert("Error registering user");
     }
   };
-  
+
+  const validatePassword = (password) => {
+    const minLength = 8;
+    const hasUppercase = /[A-Z]/.test(password);
+    const hasLowercase = /[a-z]/.test(password);
+    const hasNumber = /[0-9]/.test(password);
+    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+    if (password.length < minLength) {
+      return `Password must be at least ${minLength} characters long.`;
+    }
+    if (!hasUppercase) {
+      return "Password must include at least one uppercase letter.";
+    }
+    if (!hasLowercase) {
+      return "Password must include at least one lowercase letter.";
+    }
+    if (!hasNumber) {
+      return "Password must include at least one number.";
+    }
+    if (!hasSpecialChar) {
+      return "Password must include at least one special character.";
+    }
+    return ""; // No errors
+  };
 
   const handleHome = () => {
     navigate("/");
@@ -71,7 +102,11 @@ const Register = () => {
   return (
     <Flex align={"center"} justify="space-evenly">
       {/* logo */}
-      <Box onClick={handleHome} style={{ pointer: "cursor" }} borderRight={"1px"}>
+      <Box
+        onClick={handleHome}
+        style={{ pointer: "cursor" }}
+        borderRight={"1px"}
+      >
         <Image src={logo} alt="logo-gif" />
       </Box>
 
@@ -151,7 +186,7 @@ const Register = () => {
                   </InputGroup>
                 </FormControl>
 
-                <FormControl>
+                <FormControl isInvalid={!!error}>
                   <InputGroup>
                     <InputLeftElement
                       pointerEvents="none"
@@ -164,6 +199,7 @@ const Register = () => {
                       placeholder="Password"
                       value={formData.password}
                       onChange={handleChange}
+                      isInvalid={!!error}
                       required
                     />
                     <InputRightElement width="4.5rem">
@@ -172,6 +208,7 @@ const Register = () => {
                       </Button>
                     </InputRightElement>
                   </InputGroup>
+                  {error && <FormHelperText color="red.500">{error}</FormHelperText>}
                 </FormControl>
 
                 <FormControl>
@@ -187,9 +224,8 @@ const Register = () => {
                     <option value="electrician">Electrician</option>
                     <option value="cleaner">Cleaner</option>
                     <option value="painter">Painter</option>
-                    <option value="painter">Repair</option>
-                    <option value="painter">Washing</option>
-                  
+                    <option value="repair">Repair</option>
+                    <option value="washing">Washing</option>
                   </Select>
                 </FormControl>
 
@@ -199,6 +235,7 @@ const Register = () => {
                   variant="solid"
                   colorScheme="teal"
                   width="full"
+                  isDisabled={!!error} // Disable button if there is a password error
                 >
                   Register
                 </Button>

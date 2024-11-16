@@ -49,27 +49,27 @@ const Footer = () => {
           </HStack>
           <HStack>
             <Heading as="h6" size="xs" mt={5}>
-              USA
-            </Heading>
-          </HStack>
-          <HStack gap={5} mt={5}>
-            <Text>Austin</Text>
-            <Text>NewYork City</Text>
-          </HStack>
-          <HStack>
-            <Heading as={"h6"} size="sm" mt={5}>
               India
             </Heading>
           </HStack>
           <HStack gap={5} mt={5}>
-            <Text>Mumbai</Text>
-            <Text>Delhi</Text>
-            <Text>Surat</Text>
-            <Text>Pune</Text>
-            <Text>Nagpure</Text>
+            <Text></Text>
+            <Text></Text>
+          </HStack>
+          <HStack>
+            <Heading as={"h6"} size="sm" mt={5}>
+              
+            </Heading>
+          </HStack>
+          <HStack gap={5} mt={5}>
+            <Text>indore</Text>
+            <Text>Bhopal</Text>
+            <Text>Ujjain</Text>
+            <Text>Khargone</Text>
+            {/* <Text>Nagpure</Text>
             <Text>Hydrabad</Text>
             <Text>Bangalore</Text>
-            <Text>Patna</Text>
+            <Text>Patna</Text> */}
           </HStack>
         </Box>
       </Box>
