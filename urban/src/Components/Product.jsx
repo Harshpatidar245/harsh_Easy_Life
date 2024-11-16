@@ -12,27 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { FaStar } from "react-icons/fa";
 import { cartContext } from "../Context/CartContextProvider";
-
-// Product data
-const data = [
-  {
-    id: 1,
-    title: "Floor Cleaning",
-    rating: "4.77 (636)",
-    price: 150,
-    phone: "9826506683",
-    src: "https://res.cloudinary.com/urbanclap/image/upload/t_high_res_template,q_auto:low,f_auto/w_64,dpr_1,fl_progressive:steep,q_auto,c_limit/images/growth/home-screen/1644931257406-6b799b.jpeg",
-  },
-  {
-    id: 2,
-    title: "Bathroom Cleaning",
-    rating: "4.77 (636)",
-    price: 99,
-    phone: "9826506683",
-    src: "https://res.cloudinary.com/urbanclap/image/upload/t_high_res_template,q_auto:low,f_auto/w_64,dpr_1,fl_progressive:steep,q_auto,c_limit/images/growth/home-screen/1644931257406-6b799b.jpeg",
-  },
-  // Add more items...
-];
+import data from "./Data"; // Import the data from Data.jsx
 
 const Product = () => {
   const { total, handleTotal } = useContext(cartContext);
