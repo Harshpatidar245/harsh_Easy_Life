@@ -187,6 +187,9 @@ const Register = () => {
                     <option value="electrician">Electrician</option>
                     <option value="cleaner">Cleaner</option>
                     <option value="painter">Painter</option>
+                    <option value="painter">Repair</option>
+                    <option value="painter">Washing</option>
+                  
                   </Select>
                 </FormControl>
 

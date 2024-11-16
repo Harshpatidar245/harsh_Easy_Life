@@ -8,6 +8,7 @@ import {
   VStack,
   Button,
   Image,
+  SimpleGrid,
   Stack,
 } from "@chakra-ui/react";
 import { FaStar } from "react-icons/fa";
@@ -18,15 +19,14 @@ const Product = () => {
   const { total, handleTotal } = useContext(cartContext);
 
   return (
-    <div>
-      <Flex w={"90%"} borderTop={"1px"} m={"auto"} justify="space-between">
-        {/* Left Side */}
-        <Box px={10}>
+    <Flex w={"90%"} m={"auto"} justify="space-between" flexDirection={{ base: "column", lg: "row" }}>
+      {/* Left Side */}
+      <Box w={{ base: "100%", lg: "70%" }} px={10}>
+        <SimpleGrid columns={{ base: 1, md: 2 }} spacing={5}>
           {data.map((item) => (
             <Box
               key={item.id}
-              w="500px"
-              m={"15px"}
+              w="100%"
               h="150px"
               p={5}
               borderRadius={20}
@@ -51,19 +51,25 @@ const Product = () => {
               </Button>
             </Box>
           ))}
-        </Box>
+        </SimpleGrid>
+      </Box>
 
-        {/* Right Side */}
-        <Box w={"500px"}>
-          <Stack align={"center"} mt={100}>
-            <Heading>Total: ₹{total}</Heading>
-            <Button w={"60%"} mt={5} colorScheme="teal">
-              Checkout
-            </Button>
-          </Stack>
-        </Box>
-      </Flex>
-    </div>
+      {/* Right Side */}
+      <Box
+        w={{ base: "100%", lg: "30%" }}
+        position="sticky"
+        top="20px"
+        p={5}
+        style={{ boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px" }}
+      >
+        <Stack align={"center"}>
+          <Heading>Total: ₹{total}</Heading>
+          <Button w={"60%"} mt={5} colorScheme="teal">
+            Checkout
+          </Button>
+        </Stack>
+      </Box>
+    </Flex>
   );
 };
 

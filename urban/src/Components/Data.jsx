@@ -21,7 +21,7 @@ const data = [
     rating: "4.85 (452)",
     price: 200,
     phone: "9856234582",
-    src: "https://res.cloudinary.com/urbanclap/image/upload/q_auto,f_auto,w_64/dpr_1/c_limit/kitchen-cleaning.jpg",
+    src: "https://res.cloudinary.com/urbanclap/image/upload/t_high_res_template,q_auto:low,f_auto/w_64,dpr_1,fl_progressive:steep,q_auto,c_limit/images/growth/home-screen/1644931257406-6b799b.jpeg",
   },
   {
     id: 4,
