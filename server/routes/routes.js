@@ -61,4 +61,31 @@ router.post("/login", async (req, res) => {
   }
 });
 
+// Endpoint to fetch user details
+router.get("/getUserData", async (req, res) => {
+  try {
+    // Assuming you use JWT for authentication
+    const token = req.header("Authorization");
+    if (!token) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    const decoded = jwt.verify(token, "SECRET_KEY"); // Verify JWT token
+    const userId = decoded.userId;
+
+    // Fetch user details from the database, including only required fields
+    const user = await User.findById(userId).select('name email phone service'); // Select specific fields
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Send the selected user data as a response
+    res.status(200).json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server Error" });
+  }
+});
+
 module.exports = router;

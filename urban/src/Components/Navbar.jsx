@@ -1,35 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./Navbar.css";
 import logo from "./logo.png";
-import {
-  Box,
-  Image,
-  HStack,
-  Spacer,
-  Flex,
-  Text,
-  Input,
-  Heading,
-  Select,
-} from "@chakra-ui/react";
+import { Box, Image, HStack, Spacer, Flex, Text, Heading, Select, Input, Button } from "@chakra-ui/react";
 import { Search2Icon } from "@chakra-ui/icons";
 import { MdLocationOn } from "react-icons/md";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 
 const Navbar = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    setIsLoggedIn(!!token);
-  }, []);
-
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    setIsLoggedIn(false);
-    navigate("/");
+    localStorage.removeItem("token"); // Remove token to logout the user
+    navigate("/"); // Navigate to the Login page after logging out
   };
+  const token = localStorage.getItem("token"); // Check if token exists
 
   return (
     <div>
@@ -46,11 +33,19 @@ const Navbar = () => {
         </Box>
         <Spacer />
         <HStack spacing={20} mr={20} color={"blackAlpha.900"}>
-          {isLoggedIn ? (
-            <button onClick={handleLogout}>Logout</button>
-          ) : (
-            <Link to="/login">Login/SignUp</Link>
-          )}
+          <Box
+            bg={"white"}
+            p={3}
+            borderRadius={"lg"}
+            boxShadow={"md"}
+            mt={4}
+          >
+            {token ? (
+              <Button onClick={handleLogout}>Logout</Button> // Show logout button if logged in
+            ) : (
+              <Link to="/Login">Login/SignUp</Link> // Show login/signup link if not logged in
+            )}
+          </Box>
         </HStack>
       </Flex>
       <Box w={"60%"} m="auto" mt={"200px"}>
@@ -81,11 +76,13 @@ const Navbar = () => {
       {/* Services tab */}
       <Box
         className="services"
-        w={"70%"}
+        w={"35%"}
         h={150}
         m="auto"
         mt={75}
         bg={"whiteAlpha.900"}
+        borderRadius="30px" // Adjust the value for the desired level of rounding
+
       >
         <HStack align={"center"} spacing={10} justify={"center"} pt={5}>
           <Box align={"center"}>
@@ -95,10 +92,10 @@ const Navbar = () => {
             />
             <Link to="/product">Regular Home Cleaning</Link>
           </Box>
-          <Box align={"center"}>
+          {/* <Box align={"center"}>
             <Image src="https://res.cloudinary.com/urbanclap/image/upload/q_auto,f_auto,fl_progressive:steep,w_64/t_high_res_template/images/growth/home-screen/1647671844702-24e611.png" />
             <Text>Move In/Move Out Cleaning</Text>
-          </Box>
+          </Box> */}
         </HStack>
       </Box>
     </div>
